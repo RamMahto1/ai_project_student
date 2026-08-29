@@ -4,6 +4,7 @@ matplotlib
 scikit-learn
 catboost
 xgboost
-
+mlflow
+mlflow.sklearn
 
 ##-e .
