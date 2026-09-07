@@ -7,5 +7,6 @@ xgboost
 mlflow
 fastapi
 pydantic
+pytest
 
 ##-e .
