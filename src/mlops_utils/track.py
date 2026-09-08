@@ -1,31 +1,19 @@
-import mlflow
-import mlflow.sklearn
+import pickle
+
+from src.mlops_utils.model_registry import model_register
 
 
-def track_experiment(
-        model,
-        params: dict,
-        metrics: dict,
-        experiment_name:str = "default",
-        run_name:str = "run_1"
-):
-    '''
-    track the experiment of mlflow experiment
-    '''
+with open("artifacts/model.pkl", "rb") as file:
+    model = pickle.load(file)
 
-    # set the experiments and run 
-    mlflow.set_experiment(experiment_name=experiment_name)
-    with mlflow.start_run(run_name=run_name) as run:
 
-        # log the params and metrics
-        if params:
-            mlflow.log_params(params)
-        if metrics:
-            mlflow.log_metrics(metrics)
+version = model_register(
+    model=model,
+    model_name="student_math_predictor",
+    experiment_name="student_prediction",
+    run_name="first_registry_test",
+    alias="production"
+)
 
-        # log the model 
-        mlflow.sklearn.log_model(sk_model=model, artifact_path="model")
 
-        print(f"track the experiment:{experiment_name}, run name: {run_name}")
-
-        return run.info.run_id
+print(f"Registered model version: {version}")

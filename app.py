@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from src.pipeline.predict_pipeline import PredictPipeline, CustomData
+# from src.pipeline.predict_pipeline import PredictPipeline, CustomData
 from src.utils import load_obj
 from src.exception import CustomException
 import os
